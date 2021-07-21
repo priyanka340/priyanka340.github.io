@@ -1,6 +1,6 @@
 import Layout from "./hoc/Layout/Layout.js";
 import { useState, React, useEffect } from "react";
-
+import {BrowserRouter as Router } from "react-router-dom";
 import TabSlider from "./components/TabSlider/TabSlider.js";
 import Spinner from "./components/Spinner/Spinner.js";
 function App() {
@@ -18,7 +18,7 @@ function App() {
 
   /* Fetch the literals based on the language selected */
   const getData = () => {
-    fetch("Localization/locale-" + selectValue + ".json", {
+    fetch(process.env.PUBLIC_URL+"/Localization/locale-" + selectValue + ".json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -41,7 +41,7 @@ function App() {
   });
 
   return (
-    <div>
+    <Router basename={process.env.PUBLIC_URL}>
 
       <Layout>
 
@@ -64,7 +64,7 @@ function App() {
         {getResponse && Object.keys(languageData).length > 0 && <TabSlider languageData={languageData}></TabSlider>}
           {apiError && <h1 className="offset-1 col-10">Failed to load literals</h1>}
       </Layout>
-    </div>
+    </Router>
   );
 }
 

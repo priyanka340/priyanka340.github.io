@@ -17,7 +17,7 @@ function TabSlider(props) {
 
   /* Fetch the data from data.json to display upcomming, live, past list */
   const getData = () => {
-    fetch("data.json", {
+    fetch(process.env.PUBLIC_URL+"/data.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
